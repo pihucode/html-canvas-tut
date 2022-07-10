@@ -50,6 +50,12 @@ window.addEventListener('DOMContentLoaded', event => {
         x: undefined,
         y: undefined
     };
+    let colors = [
+        '#FFA69E', '#FAF3DD', '#B8F2E6',
+        '#AED9E0', '#5E6472', '#BDD9BF',
+        '#FFC857', '#C3D350', '#575D90',
+        '#BBB6DF', '#A30B37', '#C45AB3'];
+
     window.addEventListener('mousemove', (event) => {
         mouse.x = event.x;
         mouse.y = event.y;
@@ -70,7 +76,8 @@ window.addEventListener('DOMContentLoaded', event => {
         this.red = red;
         this.green = green;
         this.blue = blue;
-        this.color = `rgb(${red}, ${green}, ${blue})`;
+        this.color = colors[Math.floor(randRange(0, colors.length))];
+        // this.color = `rgb(${red}, ${green}, ${blue})`;
 
         this.draw = () => {
             c.beginPath();
