@@ -49,11 +49,15 @@ window.addEventListener('DOMContentLoaded', event => {
     let mouse = {
         x: undefined,
         y: undefined
-    }
+    };
     window.addEventListener('mousemove', (event) => {
         mouse.x = event.x;
         mouse.y = event.y;
-    })
+    });
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
 
     // Circle object
     function Circle(x, y, dx, dy, radius, red, green, blue) {
@@ -104,18 +108,21 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
     let circles = [];
-    for (let i = 0; i < 42; i++) {
-        let radius = randRange(10, 100);
-        let red = randRange(0, 255);
-        let green = randRange(0, 255);
-        let blue = randRange(0, 255);
-        let x = randRange(radius, innerWidth - radius);
-        let y = randRange(radius, innerHeight - radius);
-        let dir = Math.random() < 0.5 ? -1 : 1;
-        let dx = dy = 100 / radius * randRange(0.1, 0.5) * dir;
+    (init = () => {
+        circles = [];
+        for (let i = 0; i < 42; i++) {
+            let radius = randRange(10, 100);
+            let red = randRange(0, 255);
+            let green = randRange(0, 255);
+            let blue = randRange(0, 255);
+            let x = randRange(radius, innerWidth - radius);
+            let y = randRange(radius, innerHeight - radius);
+            let dir = Math.random() < 0.5 ? -1 : 1;
+            let dx = dy = 100 / radius * randRange(0.1, 0.5) * dir;
 
-        circles.push(new Circle(x, y, dx, dy, radius, red, green, blue));
-    }
+            circles.push(new Circle(x, y, dx, dy, radius, red, green, blue));
+        }
+    })();
 
     (animate = () => {
         requestAnimationFrame(animate);
